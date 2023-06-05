@@ -87,7 +87,7 @@ router.patch("/", async(req, res) => {
     client = new MongoClient(uri)
     try {
         await client.connect()
-        constrol = await client.db("psbarber").collection("roles").updateMany({nombre : "Renee.Zcboncak"},{$set:{nombre: body.nombre}}) // usuarios que tengan apellido diaz se le cambia el nombre en el postman
+        const rol = await client.db("psbarber").collection("roles").updateMany({nombre : "andres"},{$set:{nombre: body.nombre}}) // todos los usuarios que tengan el nombre andress seran modificados
         if(rol){
             res.status(201).json({message: "se actualizaron los roles en la base de datos ",rol})
         }else{
