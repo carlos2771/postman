@@ -1,4 +1,3 @@
-const e = require("express");
 const express = require("express")
 const { MongoClient, ObjectId} = require('mongodb');
 const  uri = 'mongodb+srv://admin:admin@cluster0.49jaesh.mongodb.net/?retryWrites=true&w=majority'
@@ -29,11 +28,11 @@ router.get('/:id', async (req, res) => {
     const client = new MongoClient(uri);
     try {
         await client.connect();
-        const movies = await client.db('psbarber').collection('usuarios').findOne({_id: new ObjectId(id)});
-        if (movies) {
-            res.send(movies)
+        const usuarios = await client.db('psbarber').collection('usuarios').findOne({_id: new ObjectId(id)});
+        if (usuarios) {
+            res.status(200).send(usuarios)
         }else{
-            res.send("No se encontro la informacion")
+            res.status(404).send("No se encontro la informacion")
         }
     } catch (e) {
         console.error(e)
@@ -51,7 +50,7 @@ router.post("/", async(req, res)=>{
         await client.connect()
         usuarios = client.db("psbarber").collection("usuarios").insertMany(body)
         if(usuarios){
-            res.status(201).json({message: "se insertaron las peliculas en la base de datos ", usuarios})
+            res.status(201).json({message: "se insertaron los en la base de datos ", usuarios})
         }else {
             res.status(400).send("no se creo el usuario correctamente")
         }
@@ -70,7 +69,7 @@ router.patch("/:id", async(req, res) => {
         await client.connect()
         const usuario = await client.db("psbarber").collection("usuarios").updateOne({_id: new ObjectId(id)},{$set:{nombre: body.nombre, contraseña: body.contraseña}})
         if(usuario){
-            res.status(201).json({message: "se actualizaron las peliculas en la base de datos ",usuario})
+            res.status(201).json({message: "se actualizaron los usuarios en la base de datos ",usuario})
         }else{
             res.status(404).send("no se pudieron actualizar los clientes ")
         }
@@ -90,9 +89,9 @@ router.patch("/", async(req, res) => {
         await client.connect()
         const usuario = await client.db("psbarber").collection("usuarios").updateMany({apellido : "diaz"},{$set:{nombre: body.nombre}}) // usuarios que tengan apellido diaz se le cambia el nombre en el postman
         if(usuario){
-            res.status(201).json({message: "se actualizaron las peliculas en la base de datos ",usuario})
+            res.status(201).json({message: "se actualizaron los usuarios en la base de datos ",usuario})
         }else{
-            res.status(404).send("no se pudieron actualizar los clientes ")
+            res.status(404).send("no se pudieron actualizar los usuarios ")
         }
     } catch (error) {
         console.error(error);

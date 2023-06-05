@@ -16,7 +16,7 @@ app.use(express.json())
 
 
 
-rutasApi(app)
+rutasApi(app) // app se le pasa como argumento a la funcion del index para que las rutas funcionen
 //ruta principal
 app.get ("/", (req, res)=>{
     res.status(200).send("api Usuarios")
