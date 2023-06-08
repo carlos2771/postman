@@ -8,7 +8,7 @@ const bodyparser = require("body-parser")
 // traigo las rutas del index 
 const rutasApi = require("../routes")
 
-const port = 3000
+const port = 3000 
 //Middleware
 app.use(bodyparser.json())// para poder trabajar con json
 app.use(bodyparser.urlencoded({extended :true}))// para poder trabajar con formularios codificados en url
@@ -25,6 +25,7 @@ app.get ("/", (req, res)=>{
 
 //poner a escuchar el puerto
 app.listen(port,()=> {
-    console.log(`se esta escuchando en el puerto ${port}`);
+    console.log(`se esta escuchando en el puertos ${port}`);
+    //para el ensayo
 })
 
